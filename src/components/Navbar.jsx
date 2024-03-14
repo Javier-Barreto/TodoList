@@ -5,7 +5,7 @@ export const Navbar = () => {
     <nav className="navbar bg-body-tertiary">
       <div className="container-fluid">
         <a className="navbar-brand" href='/'>ToDo List</a>
-        <a href="/login" className="btn btn-secondary">Login</a>
+        <a href="/TodoList/login" className="btn btn-secondary">Login</a>
       </div>
     </nav>
   )
