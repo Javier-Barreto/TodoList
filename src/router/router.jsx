@@ -10,11 +10,11 @@ const router = createBrowserRouter([
     errorElement: <p>There's been an error on main path</p>
   },
   {
-    path: "/TodoList/login",
+    path: "/TodoList/login/",
     element: <Login />
   },
   {
-    path: "/TodoList/dashboard",
+    path: "/TodoList/dashboard/",
     element: <Dashboard />
   }
 ]);

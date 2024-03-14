@@ -14,7 +14,7 @@ export const Dashboard = () => {
     <div>
       <nav className="navbar bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href='/'>ToDo List</a>
+          <a className="navbar-brand" href='/TodoList/'>ToDo List</a>
           <button className="btn btn-secondary" onClick={() => { signOut() }}>Sign out</button>
         </div>
       </nav>
