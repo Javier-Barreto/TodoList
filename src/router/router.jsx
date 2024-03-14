@@ -7,7 +7,7 @@ const router = createBrowserRouter([
   {
     path: "/TodoList",
     element: <App />,
-    errorElement: <p>There's been an error on main path</p>
+    errorElement: <p>There's been an error on main path</p>,
   },
   {
     path: "/TodoList/login",

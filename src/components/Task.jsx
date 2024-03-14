@@ -6,7 +6,7 @@ export const Task = () => {
       <div className="col-sm-8 col-md-11">
         <p>Task informacion</p>
       </div>
-      <button className="col-sm-4 col-md-1 btn btn-danger" type="button">Borrar</button>
+      <button className="col-sm-4 col-md-1 btn btn-danger" type="button">X</button>
     </div>
   )
 }
