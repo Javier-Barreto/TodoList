@@ -31,7 +31,7 @@ const isLogged = () => {
 
 const signInUser = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
-    .finally(() => window.location.replace("/TodoList/dashboard"))
+    .finally(() => window.location.replace("/dashboard"))
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
