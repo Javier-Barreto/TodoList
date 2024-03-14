@@ -5,16 +5,16 @@ import { Dashboard } from '../views/index.js'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/TodoList/",
     element: <App />,
     errorElement: <p>There's been an error on main path</p>, 
   },
   {
-    path: "login",
+    path: "/TodoList/login",
     element: <Login />
   },
   {
-    path: "dashboard",
+    path: "/TodoList/dashboard",
     element: <Dashboard />
   }
 ]);
