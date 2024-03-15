@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import { App, Dashboard, ErrorPage, Login, Root } from '../views/index.js'
 
 const router = createBrowserRouter([

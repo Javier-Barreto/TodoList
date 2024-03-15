@@ -21,8 +21,8 @@ export const Dashboard = () => {
 
   useEffect(() =>{
     getUserTasks(setTasks)
-    setLocalstorageUserTasks(getUserId(), JSON.stringify(tasks))
-    setTasks(JSON.parse(getLocalstorageUserTasks(getUserId())))
+    // setLocalstorageUserTasks(getUserId(), JSON.stringify(tasks))
+    // setTasks(JSON.parse(getLocalstorageUserTasks(getUserId())))
   }, [])
 
   return (
