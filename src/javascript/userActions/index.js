@@ -5,6 +5,7 @@ import {
   signOut } from "firebase/auth";
 
 import { createUserTasksDB } from "../firestore/index"
+import { removeLocalstorageUser } from "../localstorage";
 const auth = getAuth();
 
 /*
@@ -17,37 +18,40 @@ const createUser = ( email, password) =>{
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(`Error ${errorCode}; ${errorMessage}`)
+
+    alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
   });
 }
 
 const getUserId = () => {
-  return auth.currentUser.uid
-}
-
-const isLogged = () => {
-  return auth.currentUser ? true : false;
+  return auth.currentUser?.uid
 }
 
 const signInUser = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
-    .finally(() => window.location.replace("/TodoList/dashboard"))
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
     });
 
+  if(getUserId() != null || getUserId() != undefined) {
+    window.location.replace('/TodoList/dashboard')
+  }
 }
 
 const signOutUser = () => {
+  removeLocalstorageUser(getUserId())
   signOut(auth).then(() => {
     alert("Logged out")
   }).catch((error) => {
-    alert("There has been an error" + error)
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
   })
 }
 
 
 
 
-export { createUser, getUserId, isLogged, signInUser, signOutUser }
+export { createUser, getUserId, signInUser, signOutUser }

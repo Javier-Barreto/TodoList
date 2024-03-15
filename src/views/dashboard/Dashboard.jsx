@@ -1,36 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import * as dbapp from '../../../db/db'
-import { signOutUser } from '../../javascript/userActions' 
+import { getUserId } from '../../javascript/userActions' 
 import { Task } from '../../components/Task'
+import { addTask, getUserTasks } from '../../javascript/firestore'
+import { getLocalstorageUserTasks, setLocalstorageUserTasks } from '../../javascript/localstorage'
+import { Navbar } from '../../components/Navbar'
 
 export const Dashboard = () => {
+  const [descripcion, setDescripcion] = useState("")
+  const [tasks, setTasks] = useState([])
 
-  const signOut = () => {
-    signOutUser()
-    window.location.replace("/TodoList/")
+  const validAddTask = () => {
+    if (descripcion == "") {
+      alert("Favor de ingresar la descripcion de la tarea")
+    } else {
+      addTask(descripcion)
+      getUserTasks(setTasks)
+    }
   }
 
-  return (
-    <div>
-      <nav className="navbar bg-body-tertiary">
-        <div className="container-fluid">
-          <a className="navbar-brand" href='/TodoList/'>ToDo List</a>
-          <button className="btn btn-secondary" onClick={() => { signOut() }}>Sign out</button>
-        </div>
-      </nav>
-      
-      <div className="col g-0 p-4">
-        <form className="col-sm-4 col-md-6">
-          <div className="input-group mb-3">
-            <input type="text" className="form-control" placeholder="My task is about this....." required/>
-            <button className="btn btn-outline-secondary" type="submit">Agregar</button>
-          </div>
-        </form>
+  useEffect(() =>{
+    getUserTasks(setTasks)
+    setLocalstorageUserTasks(getUserId(), JSON.stringify(tasks))
+    setTasks(JSON.parse(getLocalstorageUserTasks(getUserId())))
+  }, [])
 
-        <div className="col-sm-4 col-md-6" id="tasks">
-          <Task />
+  return (
+    <>
+      <Navbar isDashboard={true}/>
+
+      <div>
+        <div className="col g-0 p-4">
+          <form className="col-sm-4 col-md-6">
+            <div className="input-group mb-3">
+              <input type="text" className="form-control" placeholder="My task is about this....." onChange={(e) => {
+                  setDescripcion(e.target.value)
+                }
+              }/>
+              <button className="btn btn-outline-secondary" type="button" onClick={() => validAddTask()}>Agregar</button>
+            </div>
+          </form>
+
+          <div className="col-sm-4 col-md-6" id="tasks">
+              {
+                tasks == 0 ? 
+                  <p>Create a new task</p>
+                :
+                tasks.map((data) => {
+                  const { id, descripcion } = data
+                  return <Task key={`user-${id}`} id={id} descripcion={descripcion} />
+                })
+              }
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
