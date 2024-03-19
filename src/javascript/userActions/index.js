@@ -12,10 +12,10 @@ const auth = getAuth();
 /*
   =====================FUNCTIONS ====================
 */
-const createUser = ( email, password) =>{
+const createUser = ( email, password, navigate) =>{
   createUserWithEmailAndPassword(auth, email, password)
   .then((data) => createUserTasksDB(data.user.uid))
-  .then(() => signInUser(email, password))
+  .then(() => signInUser(email, password, navigate))
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;

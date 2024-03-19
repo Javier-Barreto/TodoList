@@ -12,6 +12,13 @@ const Login = () => {
   const [registerE, setRgsEmail] = useState("")
   const [registerP, setRgsPwd] = useState("")
   
+  const clearFields = () => {
+    setLoginEmail("")
+    setLoginPwd("")
+    setRgsEmail("")
+    setRgsPwd("")
+  }
+
   const loginValidation = async () => {
     if (loginE != '' && loginP != ''){
       signInUser(loginE, loginP, navigate)
@@ -41,11 +48,13 @@ const Login = () => {
               <form>
                 <div className="form-group m-3">
                   <label htmlFor="loginEmail">Email</label>
-                  <input type="text" className="form-control" id="loginEmail" placeholder="email@example.com" onChange={(e) => setLoginEmail(e.target.value)} required/>
+                  <input type="text" className="form-control" id="loginEmail" placeholder="email@example.com" onChange={(e) => setLoginEmail(e.target.value)} 
+                         value={loginE} required/>
                 </div>
                 <div className="form-group m-3">
                   <label htmlFor="loginPassword">Password</label>
-                  <input type="password" className="form-control" id="loginPassword" placeholder="password" onChange={(e) => setLoginPwd(e.target.value)} required/>
+                  <input type="password" className="form-control" id="loginPassword" placeholder="password" onChange={(e) => setLoginPwd(e.target.value)} 
+                         value={loginP} required/>
                 </div>
                 <button type="button" className="btn btn-primary mx-3" onClick={() => {
                   loginValidation()
@@ -53,7 +62,10 @@ const Login = () => {
               </form>
             </div>
             <div className="text-center">
-                <p>You don't have an account? <a className="card-link" onClick={() => setLogging(!logging)}>Register</a></p>
+                <p>You don't have an account? <a className="card-link" onClick={() => { 
+                  clearFields()
+                  setLogging(!logging)
+                }}>Register</a></p>
             </div>
           </>
           :
@@ -65,11 +77,13 @@ const Login = () => {
               <form>
                 <div className="form-group m-3">
                   <label htmlFor="loginEmail">Email</label>
-                  <input type="text" className="form-control" id="caEmail" placeholder="email@example.com" onChange={(e) => setRgsEmail(e.target.value)} required/>
+                  <input type="text" className="form-control" id="caEmail" placeholder="email@example.com" onChange={(e) => setRgsEmail(e.target.value)} 
+                         value={registerE} required/>
                 </div>
                 <div className="form-group m-3">
                   <label htmlFor="loginPassword">Password</label>
-                  <input type="password" className="form-control" id="caPassword" placeholder="password" onChange={(e) => setRgsPwd(e.target.value)} required/>
+                  <input type="password" className="form-control" id="caPassword" placeholder="password" onChange={(e) => setRgsPwd(e.target.value)} 
+                         value={registerP} required/>
                 </div>
                 <button type="button" className="btn btn-primary mx-3" onClick={() => {
                   registerValidation()
@@ -77,7 +91,10 @@ const Login = () => {
               </form>
             </div>
             <div className="text-center">
-                <p>You already have an accountt? <a className="card-link" onClick={() => setLogging(!logging)}>Sign in</a></p>
+                <p>You already have an accountt? <a className="card-link" onClick={() => {
+                  clearFields()
+                  setLogging(!logging)
+                  }}>Sign in</a></p>
             </div>
           </>
         }
