@@ -14,6 +14,7 @@ export const Dashboard = () => {
     if (descripcion == "") {
       alert("Favor de ingresar la descripcion de la tarea")
     } else {
+      setDescripcion("")
       addTask(descripcion)
       getUserTasks(setTasks)
     }
@@ -33,15 +34,15 @@ export const Dashboard = () => {
 
       <div>
         <div className="col g-0 p-4">
-          <div className="col-sm-4 col-md-6">
+          <form className="col-sm-4 col-md-6" onSubmit={(e) => e.preventDefault()}>
             <div className="input-group mb-3">
               <input type="text" className="form-control" placeholder="My task is about this....." onChange={(e) => {
                   setDescripcion(e.target.value)
                 }
-              }/>
-              <button className="btn btn-outline-secondary" type="button" onClick={() => validAddTask()}>Agregar</button>
+              } value={descripcion} />
+              <button className="btn btn-outline-secondary" type="submit" onClick={() => validAddTask()}>Agregar</button>
             </div>
-          </div>
+          </form>
 
           <div className="col-sm-4 col-md-6" id="tasks">
               {
