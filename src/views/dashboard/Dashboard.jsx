@@ -33,7 +33,7 @@ export const Dashboard = () => {
 
       <div>
         <div className="col g-0 p-4">
-          <form className="col-sm-4 col-md-6">
+          <div className="col-sm-4 col-md-6">
             <div className="input-group mb-3">
               <input type="text" className="form-control" placeholder="My task is about this....." onChange={(e) => {
                   setDescripcion(e.target.value)
@@ -41,7 +41,7 @@ export const Dashboard = () => {
               }/>
               <button className="btn btn-outline-secondary" type="button" onClick={() => validAddTask()}>Agregar</button>
             </div>
-          </form>
+          </div>
 
           <div className="col-sm-4 col-md-6" id="tasks">
               {
