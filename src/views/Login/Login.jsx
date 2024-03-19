@@ -1,27 +1,31 @@
 import { useEffect, useState } from "react"
 import { Navbar } from '../../components/Navbar'
 import * as dbApp from '../../../db/db'
-import { createUser, signInUser } from "../../javascript/userActions/index"
-import { getLocalstorageUserTasks } from "../../javascript/localstorage"
+import { createUser, getUserId, signInUser } from "../../javascript/userActions/index"
+import { useNavigate } from "react-router-dom"
 
 const Login = () => {
+  const navigate = useNavigate()
   const [logging, setLogging] = useState(true)
   const [loginE, setLoginEmail] = useState("")
   const [loginP, setLoginPwd] = useState("")
   const [registerE, setRgsEmail] = useState("")
   const [registerP, setRgsPwd] = useState("")
-  const [tasks, setTasks] = useState([])
   
-  const loginValidation = () => {
+  const loginValidation = async () => {
     if (loginE != '' && loginP != ''){
-      signInUser(loginE, loginP, tasks, setTasks)
+      signInUser(loginE, loginP, navigate)
+    } else {
+      alert("Please, fill out all the fields")
     }
   }
 
   const registerValidation = () => {
     if (registerE != '' && registerP != ''){
-      createUser(registerE, registerP)
-    } 
+      createUser(registerE, registerP, navigate)
+    } else {
+      alert("Please, fill out all the fields")
+    }
   }
 
   return (

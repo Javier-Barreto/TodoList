@@ -14,11 +14,11 @@ export const Navbar = ({isLogin = false, isDashboard = false}) => {
         <Link to="/TodoList/" className="navbar-brand">TodoList</Link>
         {
           isLogin ? 
-            <Link to="/TodoList/Login" className="btn btn-secondary">Login</Link>
+            <Link to="/TodoList/login" className="btn btn-secondary">Login</Link>
           :
 
           isDashboard ?
-            <Link to="/TodoList/" className="btn btn-secondary" onClick={() => signOut()}>Sign out</Link>
+            <a href="/TodoList/" className="btn btn-secondary" onClick={() => signOut()}>Sign out</a>
           :
            <></>
         }

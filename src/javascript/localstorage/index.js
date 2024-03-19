@@ -3,7 +3,7 @@ Localstorage
 */
 
 const getLocalstorageUserTasks = (uid) => {
-  return localStorage.getItem(uid)
+  return JSON.parse(localStorage.getItem(uid))
 }
 
 const removeLocalstorageUser = (uid) => {

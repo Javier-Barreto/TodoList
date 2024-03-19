@@ -6,6 +6,7 @@ import {
 
 import { createUserTasksDB } from "../firestore/index"
 import { removeLocalstorageUser } from "../localstorage";
+
 const auth = getAuth();
 
 /*
@@ -27,16 +28,15 @@ const getUserId = () => {
   return auth.currentUser?.uid
 }
 
-const signInUser = (email, password) => {
+const signInUser = (email, password,navigate) => {
   signInWithEmailAndPassword(auth, email, password)
+    .then(() => navigate('/TodoList/dashboard'))
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-    });
 
-  if(getUserId() != null || getUserId() != undefined) {
-    window.location.replace('/TodoList/dashboard')
-  }
+      alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
+    });
 }
 
 const signOutUser = () => {
@@ -50,8 +50,5 @@ const signOutUser = () => {
     alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
   })
 }
-
-
-
 
 export { createUser, getUserId, signInUser, signOutUser }
