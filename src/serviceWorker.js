@@ -4,12 +4,11 @@ self.addEventListener('install', e => {
   console.log('installing service worker!!')
 
   e.waitUntil(
-    caches.open(CACHE_TODOLIST).then(cache => {
-      return cache.addAll([
-        './index.html',
-        './'
+    caches.open(CACHE_TODOLIST).then(async cache => {
+      await cache.addAll([
+        '/index',
       ])
-        .then(() => self.skipWaiting())
+      return self.skipWaiting()
     })
   )
 })
