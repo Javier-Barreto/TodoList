@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAnnTbR_SrWoLPtkRZUGQWPqcGIxpAPHU0",
+  apiKey: process.env.APIKEY,
   authDomain: "todolistcelda.firebaseapp.com",
   projectId: "todolistcelda",
   storageBucket: "todolistcelda.appspot.com",
