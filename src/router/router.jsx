@@ -1,18 +1,31 @@
-import { Route, Routes } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import { App, Dashboard, ErrorPage, Login, Root } from '../views/index.js'
+import { signInUser } from '../javascript/userActions/index.js';
 import { loginLoader as isUserLogged } from '../javascript/loaders/loginLoader.jsx';
 import { dashboardLoader as sendToLogin } from '../javascript/loaders/dashboardLoader.jsx';
 
-import React from 'react'
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <App />
+      },     
+      {
+        path: "login",
+        loader: isUserLogged,
+        element: <Login />
+      },
+      {
+        path: "dashboard",
+        loader: sendToLogin,
+        element: <Dashboard />
+      }
+    ] 
+  }
+], { basename: '/TodoList'});
 
-export const Router = () => {
-  return (
-    <>
-      <Routes>
-        <Route path='/' element={<App />} />
-        <Route path='login' element={<Login />} loader={isUserLogged} />
-        <Route path='dashboard' element={<Dashboard />} loader={sendToLogin} />
-      </Routes>
-    </>
-  )
-}
+export default router

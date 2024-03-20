@@ -5,7 +5,7 @@ export const loginLoader = async () => {
   const user = await getUserId();
 
   if (user) {
-    return redirect("dashboard");
+    return redirect("/dashboard");
   }
 
   return null;
