@@ -8,6 +8,17 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./public/serviceWorker.js')
+          .then((res) => {
+            console.log(res)
+          })
+        navigator.serviceWorker.ready.then((regs) => {
+          console.log('Service Worker Ready')
+        })
+      }
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

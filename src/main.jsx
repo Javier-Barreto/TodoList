@@ -4,6 +4,7 @@ import './scss/styles.scss' // Import our custom CSS
 import * as bootstrap from 'bootstrap' // Import all of Bootstrap's JS
 import { RouterProvider } from 'react-router-dom'
 import router from './router/router.jsx'
+import * as serviceworker from '../public/serviceWorker.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

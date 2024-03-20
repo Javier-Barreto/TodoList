@@ -3,7 +3,7 @@ import * as dbapp from '../../../db/db'
 import { getUserId } from '../../javascript/userActions' 
 import { Task } from '../../components/Task'
 import { addTask, getUserTasks } from '../../javascript/firestore'
-import { getLocalstorageUserTasks, setLocalstorageUserTasks } from '../../javascript/localstorage'
+import { getLocalstorageUserTasks } from '../../javascript/localstorage'
 import { Navbar } from '../../components/Navbar'
 
 export const Dashboard = () => {
