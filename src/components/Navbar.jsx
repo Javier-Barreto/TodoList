@@ -1,10 +1,13 @@
 import React from 'react'
 import { signOutUser } from '../javascript/userActions'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const Navbar = ({isLogin = false, isDashboard = false}) => {
+  const navigate = useNavigate()
   const signOut = () => {
-    signOutUser()
+    if (confirm("Do you want to loggout?")) {
+      signOutUser(navigate)
+    }
   }
 
   return (
@@ -17,7 +20,7 @@ export const Navbar = ({isLogin = false, isDashboard = false}) => {
           :
 
           isDashboard ?
-            <a href="/" className="btn btn-secondary" onClick={() => signOut()}>Sign out</a>
+            <button className="btn btn-secondary" onClick={() => signOut()}>Sign out</button>
           :
            <></>
         }

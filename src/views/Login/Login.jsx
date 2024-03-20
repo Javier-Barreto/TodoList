@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navbar } from '../../components/Navbar'
 import * as dbApp from '../../../db/db'
-import { createUser, getUserId, signInUser } from "../../javascript/userActions/index"
+import { createUser, signInUser } from "../../javascript/userActions/index"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
@@ -62,10 +62,11 @@ const Login = () => {
               </form>
             </div>
             <div className="text-center">
-                <p>You don't have an account? <a className="card-link" onClick={() => { 
-                  clearFields()
-                  setLogging(!logging)
-                }}>Register</a></p>
+                <p>You don't have an account? <button type="button" class="btn btn-link" onClick={() => { 
+                      clearFields()
+                      setLogging(!logging)
+                  }}>Register</button>
+                </p>
             </div>
           </>
           :
@@ -91,10 +92,10 @@ const Login = () => {
               </form>
             </div>
             <div className="text-center">
-                <p>You already have an accountt? <a className="card-link" onClick={() => {
-                  clearFields()
-                  setLogging(!logging)
-                  }}>Sign in</a></p>
+                <p>You already have an accountt? <a href="" className="pe-auto" onClick={() => {
+                    clearFields()
+                    setLogging(!logging)
+                  }}>Sign in</a></p>  
             </div>
           </>
         }

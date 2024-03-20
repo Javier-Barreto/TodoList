@@ -39,10 +39,11 @@ const signInUser = (email, password,navigate) => {
     });
 }
 
-const signOutUser = () => {
+const signOutUser = (navigate) => {
   removeLocalstorageUser(getUserId())
   signOut(auth).then(() => {
     alert("Logged out")
+    navigate('/')
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
