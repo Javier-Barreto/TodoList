@@ -5,7 +5,7 @@ export const dashboardLoader = async () => {
   const user = await getUserId();
 
   if (!user) {
-    return redirect("/TodoList/login");
+    return redirect("login");
   }
 
   return null;

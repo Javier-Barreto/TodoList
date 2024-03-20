@@ -15,7 +15,7 @@ const auth = getAuth();
 const createUser = ( email, password, navigate) =>{
   createUserWithEmailAndPassword(auth, email, password)
   .then((data) => createUserTasksDB(data.user.uid))
-  .then(() => navigate('/TodoList/dashboard'))
+  .then(() => navigate('/dashboard'))
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -30,7 +30,7 @@ const getUserId = () => {
 
 const signInUser = (email, password,navigate) => {
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => navigate('/TodoList/dashboard'))
+    .then(() => navigate('/dashboard'))
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
