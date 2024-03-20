@@ -13,18 +13,18 @@ const router = createBrowserRouter([
       {
         path: "/TodoList/",
         element: <App />
-      },     
-      {
-        path: "/TodoList/login",
-        loader: isUserLogged,
-        element: <Login />
-      },
-      {
-        path: "/TodoList/dashboard",
-        loader: sendToLogin,
-        element: <Dashboard />
       }
-    ] 
+    ]
+  },
+  {
+    path: "/TodoList/login",
+    loader: isUserLogged,
+    element: <Login />
+  },
+  {
+    path: "/TodoList/dashboard",
+    loader: sendToLogin,
+    element: <Dashboard />
   }
 ]);
 
