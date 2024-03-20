@@ -7,7 +7,7 @@ import { Router } from './router/Router.jsx'
 import * as serviceworker from './serviceWorker.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename='/TodoList'>
+  <BrowserRouter basename='/TodoList' future={{ v7_startTransition: true }}>
     <Router />
   </BrowserRouter>
 )
