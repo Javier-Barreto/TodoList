@@ -92,10 +92,11 @@ const Login = () => {
               </form>
             </div>
             <div className="text-center">
-                <p>You already have an accountt? <a href="" className="pe-auto" onClick={() => {
+              <p>Already have an account? <button type="button" class="btn btn-link" onClick={() => { 
                     clearFields()
                     setLogging(!logging)
-                  }}>Sign in</a></p>  
+                }}>Sign in</button>
+              </p>
             </div>
           </>
         }
