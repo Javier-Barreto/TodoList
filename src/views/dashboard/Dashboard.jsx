@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import * as dbapp from '../../../db/db'
-import { getUserId } from '../../javascript/userActions' 
+import { useNavigate } from 'react-router-dom'
+import { getUserId, isUserLogged } from '../../javascript/userActions' 
 import { Task } from '../../components/Task'
 import { addTask, getUserTasks } from '../../javascript/firestore'
 import { getLocalstorageUserTasks } from '../../javascript/localstorage'
 import { Navbar } from '../../components/Navbar'
 
 export const Dashboard = () => {
+  const navigate = useNavigate()
   const [descripcion, setDescripcion] = useState("")
   const [tasks, setTasks] = useState([])
 
@@ -26,6 +28,10 @@ export const Dashboard = () => {
     } else {
       getUserTasks(setTasks)
     }
+  }, [])
+
+  useEffect(() => {
+    isUserLogged(navigate)
   }, [])
 
   return (

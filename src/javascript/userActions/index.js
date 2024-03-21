@@ -1,6 +1,7 @@
 import { 
   createUserWithEmailAndPassword,
   getAuth,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut } from "firebase/auth";
 
@@ -25,7 +26,8 @@ const createUser = ( email, password, navigate) =>{
 }
 
 const getUserId = () => {
-  return auth.currentUser?.uid
+  const reGetAuth = getAuth() 
+  return reGetAuth.currentUser?.uid
 }
 
 const signInUser = (email, password,navigate) => {
@@ -52,4 +54,15 @@ const signOutUser = (navigate) => {
   })
 }
 
-export { createUser, getUserId, signInUser, signOutUser }
+const isUserLogged = (navigate) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      return navigate("/dashboard")
+    } else {
+      return navigate("/login")
+    }
+  });
+
+}
+
+export { createUser, getUserId, isUserLogged, signInUser, signOutUser }

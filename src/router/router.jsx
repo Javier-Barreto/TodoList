@@ -1,10 +1,7 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 import { App, Dashboard, ErrorPage, Login, Root } from '../views/index.js'
-import { signInUser } from '../javascript/userActions/index.js';
-import { loginLoader as isUserLogged } from '../javascript/loaders/loginLoader.jsx';
-import { dashboardLoader as sendToLogin } from '../javascript/loaders/dashboardLoader.jsx';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Root />,
@@ -16,16 +13,14 @@ const router = createBrowserRouter([
       },     
       {
         path: "login",
-        loader: isUserLogged,
-        element: <Login />
+        element: <Login />,
       },
       {
         path: "dashboard",
-        loader: sendToLogin,
-        element: <Dashboard />
-      }
+        element: <Dashboard />,
+      },
     ] 
   }
-], { basename: '/TodoList'});
+], { basename: '/'});
 
 export default router

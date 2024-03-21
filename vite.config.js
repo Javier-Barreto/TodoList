@@ -10,7 +10,7 @@ export default defineConfig((mode) => {
     },
 
     plugins: [react()],
-    base: '/TodoList',
-    build: '/TodoList',
+    base: '/TodoList/',
+    build: '/TodoList/',
   }
 })
