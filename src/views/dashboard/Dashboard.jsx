@@ -11,6 +11,7 @@ export const Dashboard = () => {
   const navigate = useNavigate()
   const [descripcion, setDescripcion] = useState("")
   const [tasks, setTasks] = useState([])
+  const [syncLater, setSyncLater] = useState(false)
 
   const validAddTask = () => {
     if (descripcion == "") {
@@ -18,6 +19,7 @@ export const Dashboard = () => {
     } else {
       setDescripcion("")
       addTask(descripcion)
+      setSyncLater(!syncLater)
       getUserTasks(setTasks)
     }
   }
@@ -31,13 +33,18 @@ export const Dashboard = () => {
       getUserTasks(setTasks)
     } else {
       const localUid = getLocalstorageUserId()
-      console.log(localUid)
       if (localUid) {
         setTasks(getLocalstorageUserTasks(localUid))
       }
     }
-
   }, [])
+
+  useEffect(() => {
+    if(syncLater && navigator.onLine) {
+      syncWithCloud()
+      setSyncLater(!syncLater)
+    }
+  }, [syncLater])
 
   return (
     <>

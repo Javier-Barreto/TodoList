@@ -67,8 +67,8 @@ const deleteTask = async (id) => {
   } else {
     let tId = 0
     const uid = getLocalstorageUserId()
-    const { tasks } = getLocalstorageUserTasks(uid)
-  
+    const tasks = getLocalstorageUserTasks(uid)
+
     tasks.forEach((data, index) => {
       const dataId = data.id
   
@@ -102,4 +102,15 @@ const getUserTasks = (setTasks) => {
   }
 }
 
-export { addTask, createUserTasksDB, deleteTask, getUserTasks }
+const syncWithCloud = async () => {
+  const uid = getLocalstorageUserId()
+  const tasks = getLocalstorageUserTasks(uid)
+
+  const userTasksDocRef = doc(db, "userTasks", `user-${uid}`)
+
+  await updateDoc(userTasksDocRef, {
+    tasks: tasks
+  })
+}
+
+export { addTask, createUserTasksDB, deleteTask, getUserTasks, syncWithCloud }
