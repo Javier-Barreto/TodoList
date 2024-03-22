@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { getUserId, isUserLogged } from '../../javascript/userActions' 
 import { Task } from '../../components/Task'
 import { addTask, getUserTasks } from '../../javascript/firestore'
-import { getLocalstorageUserTasks } from '../../javascript/localstorage'
+import { getLocalstorageUserId, getLocalstorageUserTasks } from '../../javascript/localstorage'
 import { Navbar } from '../../components/Navbar'
 
 export const Dashboard = () => {
@@ -23,15 +23,20 @@ export const Dashboard = () => {
   }
   
   useEffect(() => {
-    if(getLocalstorageUserTasks(getUserId())){
-      setTasks(getLocalstorageUserTasks(getUserId()))
-    } else {
-      getUserTasks(setTasks)
+    if(navigator.onLine) {
+      isUserLogged(navigate)
     }
-  }, [])
 
-  useEffect(() => {
-    isUserLogged(navigate)
+    if (navigator.onLine) {
+      getUserTasks(setTasks)
+    } else {
+      const localUid = getLocalstorageUserId()
+      console.log(localUid)
+      if (localUid) {
+        setTasks(getLocalstorageUserTasks(localUid))
+      }
+    }
+
   }, [])
 
   return (

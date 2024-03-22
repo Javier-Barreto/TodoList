@@ -6,7 +6,7 @@ import {
   signOut } from "firebase/auth";
 
 import { createUserTasksDB } from "../firestore/index"
-import { removeLocalstorageUser } from "../localstorage";
+import { removeLocalstorageUserId, removeLocalstorageUserTasks, setLocalstorageUserId } from "../localstorage";
 
 const auth = getAuth();
 
@@ -14,15 +14,25 @@ const auth = getAuth();
   =====================FUNCTIONS ====================
 */
 const createUser = ( email, password, navigate) =>{
-  createUserWithEmailAndPassword(auth, email, password)
-  .then((data) => createUserTasksDB(data.user.uid))
-  .then(() => navigate('/dashboard'))
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
-  });
+  if(navigator.onLine) {
+    createUserWithEmailAndPassword(auth, email, password)
+    .then((data) => {
+      const { user: { uid }} = data
+      createUserTasksDB(uid)
+      setLocalstorageUserId(uid)
+    })
+    .then(() => {
+      navigate('/dashboard')
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+  
+      alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
+    });
+  } else {
+    alert()
+  }
 }
 
 const getUserId = () => {
@@ -31,27 +41,42 @@ const getUserId = () => {
 }
 
 const signInUser = (email, password,navigate) => {
-  signInWithEmailAndPassword(auth, email, password)
-    .then(() => navigate('/dashboard'))
+  if (navigator.onLine) {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((data) => {
+        setLocalstorageUserId(data.user.uid)
+      })
+      .then(() => {
+          navigate('/dashboard')
+        })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
+      });
+  } else {
+    alert("No internet connection!, Try again later!")
+  }
+}
+
+const signOutUser = (navigate) => {
+  if(navigator.onLine) {
+    signOut(auth).then(() => {
+      removeLocalstorageUserId("userId")
+      removeLocalstorageUserTasks(getUserId())
+    })
+    .then(() => {
+      alert("Logged out")
+      navigate('/')
+    })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
 
       alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
-    });
-}
-
-const signOutUser = (navigate) => {
-  removeLocalstorageUser(getUserId())
-  signOut(auth).then(() => {
-    alert("Logged out")
-    navigate('/')
-  }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
-  })
+    })
+  }
 }
 
 const isUserLogged = (navigate) => {

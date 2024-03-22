@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react"
 import { Navbar } from '../../components/Navbar'
 import * as dbApp from '../../../db/db'
-import { createUser, isUserLogged, signInUser } from "../../javascript/userActions/index"
+import { createUser, getUserId, isUserLogged, signInUser } from "../../javascript/userActions/index"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
-  const navigate = useNavigate()
   const [logging, setLogging] = useState(true)
   const [loginE, setLoginEmail] = useState("")
   const [loginP, setLoginPwd] = useState("")
   const [registerE, setRgsEmail] = useState("")
   const [registerP, setRgsPwd] = useState("")
+
+  const navigate = useNavigate()
   
   const clearFields = () => {
     setLoginEmail("")
@@ -20,23 +21,33 @@ const Login = () => {
   }
 
   const loginValidation = async () => {
-    if (loginE != '' && loginP != ''){
-      signInUser(loginE, loginP, navigate)
+    if (navigator.onLine) {
+      if (loginE != '' && loginP != ''){
+        signInUser(loginE, loginP, navigate)
+      } else {
+        alert("Please, fill out all the fields")
+      }
     } else {
-      alert("Please, fill out all the fields")
+      alert("No internet connection!, please try again later.")
     }
   }
 
   const registerValidation = () => {
-    if (registerE != '' && registerP != ''){
-      createUser(registerE, registerP, navigate)
+    if (navigator.onLine) {
+      if (registerE != '' && registerP != ''){
+        createUser(registerE, registerP, navigate)
+      } else {
+        alert("Please, fill out all the fields")
+      }
     } else {
-      alert("Please, fill out all the fields")
+      alert("No internet connection!, please try again later.")
     }
   }
 
   useEffect(() => {
-    isUserLogged(navigate)
+    if (navigator.onLine) {
+      isUserLogged(navigate)
+    }
   }, [])
 
   return (

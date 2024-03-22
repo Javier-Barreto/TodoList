@@ -1,12 +1,10 @@
 const CACHE_TODOLIST = 'my-cache'
 
 self.addEventListener('install', e => {
-  console.log('installing service worker!!')
-
   e.waitUntil(
     caches.open(CACHE_TODOLIST).then(async cache => {
       await cache.addAll([
-        '/index',
+        '/',
       ])
       return self.skipWaiting()
     })
@@ -14,15 +12,12 @@ self.addEventListener('install', e => {
 })
 
 self.addEventListener('activate', event => {
-  console.log('activating service worker')
   event.waitUntil(self.clients.claim())
 })
 
 self.addEventListener('fetch', (e) => {
-  console.log(`fetching ${e.request.url}`)
-
   if (navigator.onLine) {
-    let fetchRequest = event.request.clone()
+    let fetchRequest = e.request.clone()
 
     return fetch(fetchRequest).then(
       (response) => {
@@ -34,7 +29,7 @@ self.addEventListener('fetch', (e) => {
 
         caches.open(CACHE_TODOLIST)
           .then((cache) => {
-            cache.put(event.request, responseToCache)
+            cache.put(e.request, responseToCache)
           })
 
         return response;

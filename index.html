@@ -11,10 +11,7 @@
     <script type="module" src="/src/main.jsx"></script>
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/src/serviceWorker.js')
-          .then((res) => {
-            console.log(res)
-          })
+        navigator.serviceWorker.register('/TodoList/serviceWorker.js', { scope: '/TodoList/' })
         navigator.serviceWorker.ready.then((regs) => {
           console.log('Service Worker Ready')
         })

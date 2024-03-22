@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export const Navbar = ({isLogin = false, isDashboard = false}) => {
   const navigate = useNavigate()
+  
   const signOut = () => {
     if (confirm("Do you want to loggout?")) {
       signOutUser(navigate)
