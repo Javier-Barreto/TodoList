@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navbar } from '../../components/Navbar'
 import * as dbApp from '../../../db/db'
-import { createUser, getUserId, isUserLogged, signInUser } from "../../javascript/userActions/index"
+import { createUser, isUserLogged, signInUser } from "../../javascript/userActions/index"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
@@ -53,7 +53,7 @@ const Login = () => {
   return (
     <>
       <Navbar />
-      <div className="container">
+      <div className="container border rounded mt-5 bg-dark text-white">
         {logging ? 
           <>
             <div className="text-center mt-3">
@@ -71,13 +71,13 @@ const Login = () => {
                   <input type="password" className="form-control" id="loginPassword" placeholder="password" onChange={(e) => setLoginPwd(e.target.value)} 
                          value={loginP} required/>
                 </div>
-                <button type="button" className="btn btn-primary mx-3" onClick={() => {
+                <button type="button" className="btn btn-light mx-3" onClick={() => {
                   loginValidation()
                 }}>Sign In</button>
               </form>
             </div>
             <div className="text-center">
-                <p>You don't have an account? <button type="button" className="btn btn-link" onClick={() => { 
+                <p>You don't have an account? <button type="button" className="btn btn-link text-white" onClick={() => { 
                       clearFields()
                       setLogging(!logging)
                   }}>Register</button>
@@ -101,13 +101,13 @@ const Login = () => {
                   <input type="password" className="form-control" id="caPassword" placeholder="password" onChange={(e) => setRgsPwd(e.target.value)} 
                          value={registerP} required/>
                 </div>
-                <button type="button" className="btn btn-primary mx-3" onClick={() => {
+                <button type="button" className="btn btn-light mx-3" onClick={() => {
                   registerValidation()
                 }}>Create Account</button>
               </form>
             </div>
             <div className="text-center">
-              <p>Already have an account? <button type="button" className="btn btn-link" onClick={() => { 
+              <p>Already have an account? <button type="button" className="btn btn-link text-white" onClick={() => { 
                     clearFields()
                     setLogging(!logging)
                 }}>Sign in</button>

@@ -13,6 +13,26 @@ export const Dashboard = () => {
   const [tasks, setTasks] = useState([])
   const [syncLater, setSyncLater] = useState(false)
 
+  const countCompletedTasks = () => {
+    let count = 0
+    
+    tasks.forEach((data) => {
+      data.completado ? count++ : null
+    })
+
+    return count
+  }
+
+  const countNotCompletedTasks = () => {
+    let count = 0
+    
+    tasks.forEach((data) => {
+      data.completado ? null : count++
+    })
+
+    return count
+  }
+
   const validAddTask = () => {
     if (descripcion == "") {
       alert("Favor de ingresar la descripcion de la tarea")
@@ -41,7 +61,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if(syncLater && navigator.onLine) {
-      syncWithCloud()
+      // syncWithCloud()
       setSyncLater(!syncLater)
     }
   }, [syncLater])
@@ -51,8 +71,9 @@ export const Dashboard = () => {
       <Navbar isDashboard={true}/>
 
       <div>
-        <div className="col g-0 p-4">
-          <form className="col-sm-4 col-md-6" onSubmit={(e) => e.preventDefault()}>
+        <div className="p-4">
+          <form className="col-sm-4 col-md-6 mb-5" onSubmit={(e) => e.preventDefault()}>
+            <p>Add Task:</p>
             <div className="input-group mb-3">
               <input type="text" className="form-control" placeholder="My task is about this....." onChange={(e) => {
                   setDescripcion(e.target.value)
@@ -62,16 +83,36 @@ export const Dashboard = () => {
             </div>
           </form>
 
-          <div className="col-sm-4 col-md-6" id="tasks">
+          <div className="row">
+            <div className="col-6 p-2" id="tasks">
+              <p>Tasks:</p>
               {
-                tasks == 0 ? 
+                countNotCompletedTasks() == 0 ? 
                   <p>Create a new task</p>
                 :
                 tasks.map((data) => {
-                  const { id, descripcion } = data
-                  return <Task key={`user-${id}`} id={id} descripcion={descripcion} />
+                  const { id, completado, descripcion } = data
+                  if (!completado) {
+                    return <Task key={`user-${id}`} id={id} descripcion={descripcion} />
+                  }
                 })
               }
+            </div>
+
+            <div className="col-6 p-2" id="tasks">
+              <p>Completed tasks:</p>
+                {
+                  countCompletedTasks() == 0 ? 
+                  <p>You haven't completed any task yet!</p>
+                  :
+                  tasks.map((data) => {
+                    const { id, completado, descripcion } = data
+                    if (completado) {
+                      return <Task key={`user-${id}`} id={id} completado={completado} descripcion={descripcion} />
+                    }
+                  })
+                }
+            </div>
           </div>
         </div>
       </div>

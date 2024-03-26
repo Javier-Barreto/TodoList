@@ -34,6 +34,31 @@ const addTask = async (desc) => {
   }
 }
 
+const completeTask = async (id) => {
+  if(navigator.onLine) {
+    const uid = getUserId()
+    const userTasksDocRef = doc(db, "userTasks", `user-${uid}`) // Referencia a la DB de las tasks del usuario
+    
+    const data = await getDoc(userTasksDocRef) // Obtiene la info del documento
+    let tempData = data.data() // Saca la informacion de la query del doc
+    const { tasks } = tempData
+  
+    tasks.map((data) => {
+      let dataId = data.id
+  
+      if (dataId == id) {
+        data.completado = !data.completado
+      }
+    })
+  
+    await updateDoc(userTasksDocRef, {
+      tasks: tasks
+    })
+
+    setLocalstorageUserTasks(uid, JSON.stringify(tasks))
+  }
+}
+
 const createUserTasksDB = async (uid) => {
   await setDoc(doc(db, "userTasks", `user-${uid}`), { // db - Colleccion - Nombre del documento
     tasks: []
@@ -113,4 +138,4 @@ const syncWithCloud = async () => {
   })
 }
 
-export { addTask, createUserTasksDB, deleteTask, getUserTasks, syncWithCloud }
+export { addTask, completeTask, createUserTasksDB, deleteTask, getUserTasks, syncWithCloud }

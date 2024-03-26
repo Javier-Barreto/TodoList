@@ -1,8 +1,7 @@
 import React from 'react'
-import { deleteTask } from '../javascript/firestore'
+import { completeTask, deleteTask } from '../javascript/firestore'
 
-export const Task = ({ id, descripcion}) => {
-
+export const Task = ({ id, completado, descripcion}) => {
   const validateDelete = () => {
     if (window.confirm("Quieres borrar la tarea?")) {
       deleteTask(id)
@@ -10,11 +9,19 @@ export const Task = ({ id, descripcion}) => {
   }
   
   return (
-    <div className="input-group mb-2 border rounded">
-      <div className="col-sm-8 col-md-11 align-middle">
+    <div className="mb-2 border rounded p-3 bg-dark text-white">
+      <div className="col-12 align-middle">
         <p>{descripcion}</p>
       </div>
-      <button className="col-sm-4 col-md-1 btn btn-danger" type="button" onClick={() => validateDelete()}>X</button>
+      <div className="col-12 d-flex justify-content-end">
+        {
+          completado ? 
+            <button className="btn btn-outline-warning mx-2" type="button" onClick={() => completeTask(id)}>Undone</button>
+            :
+            <button className="btn btn-outline-success mx-2" type="button" onClick={() => completeTask(id)}>Done</button>
+        }
+        <button className="btn btn-outline-danger" type="button" onClick={() => validateDelete()}>Delete</button>
+      </div>
     </div>
   )
 }

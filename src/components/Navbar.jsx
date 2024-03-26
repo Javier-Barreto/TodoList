@@ -12,16 +12,16 @@ export const Navbar = ({isLogin = false, isDashboard = false}) => {
   }
 
   return (
-    <nav className="navbar bg-body-tertiary">
+    <nav className="navbar bg-dark">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand">TodoList</Link>
+        <Link to="/" className="navbar-brand text-white">TodoList</Link>
         {
           isLogin ? 
-            <Link to="login" className="btn btn-secondary">Login</Link>
+            <Link to="login" className="btn btn-light">Login</Link>
           :
 
           isDashboard ?
-            <button className="btn btn-secondary" onClick={() => signOut()}>Sign out</button>
+            <button className="btn btn-light" onClick={() => signOut()}>Sign out</button>
           :
            <></>
         }
