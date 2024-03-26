@@ -3,14 +3,16 @@ import * as dbapp from '../../../db/db'
 import { useNavigate } from 'react-router-dom'
 import { getUserId, isUserLogged } from '../../javascript/userActions' 
 import { Task } from '../../components/Task'
-import { addTask, getUserTasks } from '../../javascript/firestore'
+import { addTask, getUserTasks, syncWithCloud } from '../../javascript/firestore'
 import { getLocalstorageUserId, getLocalstorageUserTasks } from '../../javascript/localstorage'
 import { Navbar } from '../../components/Navbar'
+import { EditTaskModal } from '../../components/EditTaskModal'
 
 export const Dashboard = () => {
   const navigate = useNavigate()
   const [descripcion, setDescripcion] = useState("")
   const [tasks, setTasks] = useState([])
+  const [taskDesc, setTaskDesc] = useState({ id: 0, descripcion: ""})
   const [syncLater, setSyncLater] = useState(false)
 
   const countCompletedTasks = () => {
@@ -61,7 +63,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if(syncLater && navigator.onLine) {
-      // syncWithCloud()
+      syncWithCloud()
       setSyncLater(!syncLater)
     }
   }, [syncLater])
@@ -69,7 +71,6 @@ export const Dashboard = () => {
   return (
     <>
       <Navbar isDashboard={true}/>
-
       <div>
         <div className="p-4">
           <form className="col-sm-4 col-md-6 mb-5" onSubmit={(e) => e.preventDefault()}>
@@ -93,7 +94,7 @@ export const Dashboard = () => {
                 tasks.map((data) => {
                   const { id, completado, descripcion } = data
                   if (!completado) {
-                    return <Task key={`user-${id}`} id={id} descripcion={descripcion} />
+                    return <Task key={`user-${id}`} id={id} completado={completado}  descripcion={descripcion} setTaskDesc={setTaskDesc}/>
                   }
                 })
               }
@@ -108,7 +109,7 @@ export const Dashboard = () => {
                   tasks.map((data) => {
                     const { id, completado, descripcion } = data
                     if (completado) {
-                      return <Task key={`user-${id}`} id={id} completado={completado} descripcion={descripcion} />
+                      return <Task key={`user-${id}`} id={id} completado={completado} descripcion={descripcion} setTaskDesc={setTaskDesc}/>
                     }
                   })
                 }
@@ -116,6 +117,7 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
+      <EditTaskModal taskDesc={taskDesc}/>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { completeTask, deleteTask } from '../javascript/firestore'
 
-export const Task = ({ id, completado, descripcion}) => {
+export const Task = ({ id, completado, descripcion, setTaskDesc}) => {
   const validateDelete = () => {
     if (window.confirm("Quieres borrar la tarea?")) {
       deleteTask(id)
@@ -18,7 +18,13 @@ export const Task = ({ id, completado, descripcion}) => {
           completado ? 
             <button className="btn btn-outline-warning mx-2" type="button" onClick={() => completeTask(id)}>Undone</button>
             :
-            <button className="btn btn-outline-success mx-2" type="button" onClick={() => completeTask(id)}>Done</button>
+            <>
+              <button className="btn btn-outline-success mx-2" type="button" onClick={() => completeTask(id)}>Done</button>
+              <button className="btn btn-outline-warning mx-2" data-bs-toggle="modal" data-bs-target="#editTaskModal"
+                      onClick={() => {
+                        setTaskDesc({id: id, descripcion: descripcion})
+                      }}>Edit</button>
+            </>
         }
         <button className="btn btn-outline-danger" type="button" onClick={() => validateDelete()}>Delete</button>
       </div>
