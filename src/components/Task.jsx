@@ -7,6 +7,12 @@ export const Task = ({ id, completado, descripcion, setTaskDesc}) => {
       deleteTask(id)
     }
   }
+
+  const data = {id: id, descripcion: descripcion}
+
+  const test = () => {
+    setTaskDesc(data)
+  }
   
   return (
     <div className="mb-2 border rounded p-3 bg-dark text-white">
@@ -21,9 +27,7 @@ export const Task = ({ id, completado, descripcion, setTaskDesc}) => {
             <>
               <button className="btn btn-outline-success mx-2" type="button" onClick={() => completeTask(id)}>Done</button>
               <button className="btn btn-outline-warning mx-2" data-bs-toggle="modal" data-bs-target="#editTaskModal"
-                      onClick={() => {
-                        setTaskDesc({id: id, descripcion: descripcion})
-                      }}>Edit</button>
+                      onClick={() => test()}>Edit</button>
             </>
         }
         <button className="btn btn-outline-danger" type="button" onClick={() => validateDelete()}>Delete</button>

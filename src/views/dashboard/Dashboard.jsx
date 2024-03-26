@@ -63,7 +63,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     if(syncLater && navigator.onLine) {
-      syncWithCloud()
+      // syncWithCloud()
       setSyncLater(!syncLater)
     }
   }, [syncLater])

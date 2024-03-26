@@ -27,7 +27,6 @@ const addTask = async (desc) => {
   } else {
     const uid = getLocalstorageUserId()
     const tasks = getLocalstorageUserTasks(uid)
-    console.log(uid, tasks)
     const task = { id: uuidv4(), descripcion: desc, completado: false }
     tasks.push(task)
     setLocalstorageUserTasks(uid, JSON.stringify(tasks))

@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { editTaskDescription } from '../javascript/firestore'
 
 export const EditTaskModal = ({ taskDesc }) => {
   const { id, descripcion } = taskDesc
-  const [newDesc, setNewDesc] = useState(descripcion)
+  const [newDesc, setNewDesc] = useState("")
+
+  useEffect(() => {
+    setNewDesc(descripcion)
+  }, [taskDesc])
 
   const validateEdit = () => {
     if(window.confirm("Quieres editar la tarea?")) {
@@ -21,7 +25,7 @@ export const EditTaskModal = ({ taskDesc }) => {
           <div className="modal-body">
             <div className="mb-3">
               <p>New description:</p>
-              <textarea className="form-control" id="message-text" value={descripcion} onChange={(e) => {
+              <textarea className="form-control" id="message-text" value={newDesc} onChange={(e) => {
                 setNewDesc(e.target.value)
               }} />
             </div>
