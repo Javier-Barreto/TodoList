@@ -87,21 +87,24 @@ export const Dashboard = () => {
           <div className="row">
             <div className="col-6 p-2" id="tasks">
               <p>Tasks:</p>
-              {
-                countNotCompletedTasks() == 0 ? 
-                  <p>Create a new task</p>
-                :
-                tasks.map((data) => {
-                  const { id, completado, descripcion } = data
-                  if (!completado) {
-                    return <Task key={`user-${id}`} id={id} completado={completado}  descripcion={descripcion} setTaskDesc={setTaskDesc}/>
-                  }
-                })
-              }
+              <div className="overflow-auto" style={{ height: 400 }}>
+                {
+                  countNotCompletedTasks() == 0 ? 
+                    <p>Create a new task</p>
+                  :
+                  tasks.map((data) => {
+                    const { id, completado, descripcion } = data
+                    if (!completado) {
+                      return <Task key={`user-${id}`} id={id} completado={completado}  descripcion={descripcion} setTaskDesc={setTaskDesc}/>
+                    }
+                  })
+                }
+              </div>
             </div>
 
             <div className="col-6 p-2" id="tasks">
               <p>Completed tasks:</p>
+              <div className="overflow-auto" style={{ height: 400 }}>
                 {
                   countCompletedTasks() == 0 ? 
                   <p>You haven't completed any task yet!</p>
@@ -113,11 +116,15 @@ export const Dashboard = () => {
                     }
                   })
                 }
+              </div>
             </div>
           </div>
         </div>
       </div>
       <EditTaskModal taskDesc={taskDesc}/>
+      {/* <footer className="text-center p-4 bg-dark text-white sticky-bottom">
+        © {new Date().getFullYear()} Copyright: TodoList
+      </footer> */}
     </>
   )
 }
