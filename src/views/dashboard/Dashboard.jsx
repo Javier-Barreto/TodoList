@@ -61,12 +61,12 @@ export const Dashboard = () => {
     }
   }, [])
 
-  useEffect(() => {
-    if(syncLater && navigator.onLine) {
-      // syncWithCloud()
-      setSyncLater(!syncLater)
-    }
-  }, [syncLater])
+  // useEffect(() => {
+  //   if(syncLater && navigator.onLine) {
+  //     // syncWithCloud()
+  //     setSyncLater(!syncLater)
+  //   }
+  // }, [syncLater])
 
   return (
     <>
