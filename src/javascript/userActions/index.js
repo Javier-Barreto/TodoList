@@ -6,7 +6,7 @@ import {
   signOut } from "firebase/auth";
 
 import { createUserTasksDB } from "../firestore/index"
-import { removeLocalstorageUserId, removeLocalstorageUserTasks, setLocalstorageUserId } from "../localstorage";
+import { removeLocalstorageUserId, removeLocalstorageUserTasks, setLocalstorageUserId, setLocalstorageUserTasks } from "../localstorage";
 
 const auth = getAuth();
 
@@ -20,6 +20,7 @@ const createUser = ( email, password, navigate) =>{
       const { user: { uid }} = data
       createUserTasksDB(uid)
       setLocalstorageUserId(uid)
+      setLocalstorageUserTasks(uid, JSON.stringify([]))
     })
     .then(() => {
       navigate('/dashboard')

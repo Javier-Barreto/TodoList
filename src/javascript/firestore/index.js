@@ -161,7 +161,7 @@ const editTaskDescription = async (id, newDesc) => {
 
 const getUserTasks = (setTasks) => {
   if (navigator.onLine) {
-    const uid = getLocalstorageUserId()
+    const uid = getUserId()
     let tasks = {}
   
     const sub = onSnapshot(doc(db, "userTasks", `user-${uid}`), (doc) => {

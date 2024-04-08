@@ -1,16 +1,19 @@
 import React from 'react'
 import { Navbar } from '../../components/Navbar'
-import { getUserId } from '../../javascript/userActions'
+import { useNavigate } from 'react-router-dom'
+import { getUserId, signOutUser } from '../../javascript/userActions'
 
 export const App = () => {
+  const navigate = useNavigate()
+
   return (
     <>
       <Navbar isLogin={true} />
       <div>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mt-2">
           <h1>Website content</h1>
-          {/* <button onClick={() => console.log(getUserId())}>Auth status</button> */}
         </div>
+        <button className="btn btn-primary" onClick={() => signOutUser(navigate)}>Loggout btn</button>
       </div>
     </>
   )

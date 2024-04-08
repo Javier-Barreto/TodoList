@@ -18,9 +18,11 @@ export const Dashboard = () => {
   const countCompletedTasks = () => {
     let count = 0
     
-    tasks.forEach((data) => {
-      data.completado ? count++ : null
-    })
+    if (tasks.length != 0) {
+      tasks.forEach((data) => {
+        data.completado ? count++ : null
+      })
+    }
 
     return count
   }
@@ -28,9 +30,11 @@ export const Dashboard = () => {
   const countNotCompletedTasks = () => {
     let count = 0
     
-    tasks.forEach((data) => {
-      data.completado ? null : count++
-    })
+    if (tasks.length != 0) {
+      tasks.forEach((data) => {
+        data.completado ? null : count++
+      })
+    }
 
     return count
   }
@@ -49,17 +53,13 @@ export const Dashboard = () => {
     if(navigator.onLine) {
       isUserLogged(navigate)
     }
+
     const localUid = getLocalstorageUserId()
 
-    if (localUid) {
-      let tasks = getLocalstorageUserTasks(localUid)
-      
-      if (tasks.length == 0) {
-        tasks = getUserTasks(setTasks)
-        console.log("entre")
-      }
-
-      setTasks(tasks)
+    let tasks = getLocalstorageUserTasks(localUid)
+    
+    if (tasks.length == 0) {
+      getUserTasks(setTasks)
     }
   }, [])
 
