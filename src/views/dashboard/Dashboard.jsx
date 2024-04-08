@@ -61,6 +61,8 @@ export const Dashboard = () => {
     if (tasks.length == 0) {
       getUserTasks(setTasks)
     }
+
+    setTasks(tasks)
   }, [])
 
   useEffect(() => {
@@ -97,7 +99,7 @@ export const Dashboard = () => {
                   tasks.map((data) => {
                     const { id, completado, descripcion } = data
                     if (!completado) {
-                      return <Task key={`user-${id}`} id={id} completado={completado}  descripcion={descripcion} setTasks={setTasks}/>
+                      return <Task key={`user-${id}`} id={id} completado={completado}  descripcion={descripcion} setTaskDesc={setTaskDesc}/>
                     }
                   })
                 }
