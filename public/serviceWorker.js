@@ -4,7 +4,6 @@ self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_TODOLIST).then(async cache => {
       await cache.addAll([
-        '/',
         '/index.html'
       ])
       return self.skipWaiting()
