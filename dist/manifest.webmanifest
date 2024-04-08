@@ -1,1 +1,0 @@
-{"name":"todolist","short_name":"todolist","start_url":"/TodoList/","display":"standalone","background_color":"#ffffff","lang":"en","scope":"/TodoList/", "icons": [{ "src": "./vite.svg", "sizes": "140x140"}]}

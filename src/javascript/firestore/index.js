@@ -34,7 +34,7 @@ const addTask = async (desc, setSyncLater) => {
   }
 }
 
-const completeTask = async (id) => {
+const completeTask = async (id, setSyncLater, setTasks) => {
   if(navigator.onLine) {
     const uid = getUserId()
     const userTasksDocRef = doc(db, "userTasks", `user-${uid}`) // Referencia a la DB de las tasks del usuario
@@ -69,6 +69,8 @@ const completeTask = async (id) => {
     })
   
     setLocalstorageUserTasks(uid, JSON.stringify(tasks))
+    setSyncLater(true)
+    setTasks(tasks)
   }
 }
 
@@ -78,7 +80,7 @@ const createUserTasksDB = async (uid) => {
   });
 }
 
-const deleteTask = async (id) => {
+const deleteTask = async (id, setSyncLater, setTasks) => {
   if(navigator.onLine) {
     let tId = 0
     const uid = getLocalstorageUserId()
@@ -116,12 +118,14 @@ const deleteTask = async (id) => {
     })
   
     tasks.splice(tId, 1)
-    
+
     setLocalstorageUserTasks(uid, JSON.stringify(tasks))
+    setSyncLater(true)
+    setTasks(tasks)
   }
 }
 
-const editTaskDescription = async (id, newDesc) => {
+const editTaskDescription = async (id, newDesc, setSyncLater, setTasks) => {
   if(navigator.onLine) {
     const uid = getUserId()
     const userTasksDocRef = doc(db, "userTasks", `user-${uid}`) // Referencia a la DB de las tasks del usuario
@@ -156,6 +160,8 @@ const editTaskDescription = async (id, newDesc) => {
     })
   
     setLocalstorageUserTasks(uid, JSON.stringify(tasks))
+    setSyncLater(true)
+    setTasks(tasks)
   }
 }
 

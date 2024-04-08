@@ -1,10 +1,10 @@
 import React from 'react'
 import { completeTask, deleteTask } from '../javascript/firestore'
 
-export const Task = ({ id, completado, descripcion, setTaskDesc}) => {
+export const Task = ({ id, completado, descripcion, setSyncLater, setTasks, setTaskDesc}) => {
   const validateDelete = () => {
     if (window.confirm("Quieres borrar la tarea?")) {
-      deleteTask(id)
+      deleteTask(id, setSyncLater, setTasks)
     }
   }
 
@@ -22,10 +22,10 @@ export const Task = ({ id, completado, descripcion, setTaskDesc}) => {
       <div className="col-12 d-flex justify-content-end">
         {
           completado ? 
-            <button className="btn btn-outline-warning mx-2" type="button" onClick={() => completeTask(id)}>Undone</button>
+            <button className="btn btn-outline-warning mx-2" type="button" onClick={() => completeTask(id, setSyncLater, setTasks)}>Undone</button>
             :
             <>
-              <button className="btn btn-outline-success mx-2" type="button" onClick={() => completeTask(id)}>Done</button>
+              <button className="btn btn-outline-success mx-2" type="button" onClick={() => completeTask(id, setSyncLater, setTasks)}>Done</button>
               <button className="btn btn-outline-warning mx-2" data-bs-toggle="modal" data-bs-target="#editTaskModal"
                       onClick={() => taskDesc()}>Edit</button>
             </>

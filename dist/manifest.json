@@ -1,0 +1,31 @@
+{
+  "name":"todolist",
+  "short_name":"todolist",
+  "start_url":"/TodoList/",
+  "display":"standalone",
+  "background_color":"#ffffff",
+  "lang":"en",
+  "scope":"/TodoList/",
+  "icons": [
+    {
+      "src": "assets/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+     "src": "assets/screenshot1.png",
+      "sizes": "1600x736",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Wonder Widgets"
+    },
+    {
+      "src": "assets/screenshot2.png",
+       "sizes": "783x738",
+       "type": "image/png"
+     }
+  ]
+}

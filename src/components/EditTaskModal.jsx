@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { editTaskDescription } from '../javascript/firestore'
 
-export const EditTaskModal = ({ taskDesc }) => {
+export const EditTaskModal = ({ setSyncLater, setTasks, taskDesc }) => {
   const { id, descripcion } = taskDesc
   const [newDesc, setNewDesc] = useState("")
 
@@ -11,7 +11,7 @@ export const EditTaskModal = ({ taskDesc }) => {
 
   const validateEdit = () => {
     if(window.confirm("Quieres editar la tarea?")) {
-      editTaskDescription(id, newDesc)
+      editTaskDescription(id, newDesc, setSyncLater, setTasks)
     }
   }
 

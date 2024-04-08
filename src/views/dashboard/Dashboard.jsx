@@ -99,7 +99,7 @@ export const Dashboard = () => {
                   tasks.map((data) => {
                     const { id, completado, descripcion } = data
                     if (!completado) {
-                      return <Task key={`user-${id}`} id={id} completado={completado}  descripcion={descripcion} setTaskDesc={setTaskDesc}/>
+                      return <Task key={`user-${id}`} id={id} completado={completado}  descripcion={descripcion} setSyncLater={setSyncLater} setTasks={setTasks} setTaskDesc={setTaskDesc}/>
                     }
                   })
                 }
@@ -116,7 +116,7 @@ export const Dashboard = () => {
                   tasks.map((data) => {
                     const { id, completado, descripcion } = data
                     if (completado) {
-                      return <Task key={`user-${id}`} id={id} completado={completado} descripcion={descripcion} setTaskDesc={setTaskDesc}/>
+                      return <Task key={`user-${id}`} id={id} completado={completado} descripcion={descripcion} setSyncLater={setSyncLater} setTasks={setTasks} setTaskDesc={setTaskDesc}/>
                     }
                   })
                 }
@@ -125,7 +125,7 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
-      <EditTaskModal taskDesc={taskDesc}/>
+      <EditTaskModal taskDesc={taskDesc} setSyncLater={setSyncLater} setTasks={setTasks} />
       {/* <footer className="text-center p-4 bg-dark text-white sticky-bottom">
         © {new Date().getFullYear()} Copyright: TodoList
       </footer> */}
