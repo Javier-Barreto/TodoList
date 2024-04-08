@@ -49,10 +49,17 @@ export const Dashboard = () => {
     if(navigator.onLine) {
       isUserLogged(navigate)
     }
-
     const localUid = getLocalstorageUserId()
+
     if (localUid) {
-      setTasks(getLocalstorageUserTasks(localUid))
+      let tasks = getLocalstorageUserTasks(localUid)
+      
+      if (tasks.length == 0) {
+        tasks = getUserTasks(setTasks)
+        console.log("entre")
+      }
+
+      setTasks(tasks)
     }
   }, [])
 
