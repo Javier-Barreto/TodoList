@@ -51,22 +51,18 @@ export const Dashboard = () => {
       isUserLogged(navigate)
     }
 
-    if (navigator.onLine) {
-      getUserTasks(setTasks)
-    } else {
-      const localUid = getLocalstorageUserId()
-      if (localUid) {
-        setTasks(getLocalstorageUserTasks(localUid))
-      }
+    const localUid = getLocalstorageUserId()
+    if (localUid) {
+      setTasks(getLocalstorageUserTasks(localUid))
     }
   }, [])
 
-  // useEffect(() => {
-  //   if(syncLater && navigator.onLine) {
-  //     // syncWithCloud()
-  //     setSyncLater(!syncLater)
-  //   }
-  // }, [syncLater])
+  useEffect(() => {
+    if(syncLater) {
+      syncWithCloud()
+      setSyncLater(!syncLater)
+    }
+  }, [syncLater])
 
   return (
     <>
