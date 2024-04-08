@@ -40,8 +40,7 @@ export const Dashboard = () => {
       alert("Favor de ingresar la descripcion de la tarea")
     } else {
       setDescripcion("")
-      addTask(descripcion)
-      setSyncLater(!syncLater)
+      addTask(descripcion, setSyncLater)
       getUserTasks(setTasks)
     }
   }
@@ -60,7 +59,7 @@ export const Dashboard = () => {
   useEffect(() => {
     if(syncLater) {
       syncWithCloud()
-      setSyncLater(!syncLater)
+      setSyncLater(false)
     }
   }, [syncLater])
 
@@ -91,7 +90,7 @@ export const Dashboard = () => {
                   tasks.map((data) => {
                     const { id, completado, descripcion } = data
                     if (!completado) {
-                      return <Task key={`user-${id}`} id={id} completado={completado}  descripcion={descripcion} setTaskDesc={setTaskDesc}/>
+                      return <Task key={`user-${id}`} id={id} completado={completado}  descripcion={descripcion} setTasks={setTasks}/>
                     }
                   })
                 }

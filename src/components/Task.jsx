@@ -1,17 +1,12 @@
 import React from 'react'
-import { completeTask, deleteTask } from '../javascript/firestore'
+import { completeTask, deleteTask, getUserTasks } from '../javascript/firestore'
 
-export const Task = ({ id, completado, descripcion, setTaskDesc}) => {
+export const Task = ({ id, completado, descripcion, setTasks}) => {
   const validateDelete = () => {
     if (window.confirm("Quieres borrar la tarea?")) {
       deleteTask(id)
+      getUserTasks(setTasks)
     }
-  }
-
-  const data = {id: id, descripcion: descripcion}
-
-  const test = () => {
-    setTaskDesc(data)
   }
   
   return (

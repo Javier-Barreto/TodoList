@@ -11,7 +11,7 @@ const db = getFirestore(app)
 Functions
 =========
 */
-const addTask = async (desc) => {
+const addTask = async (desc, setSyncLater) => {
   if (navigator.onLine) {
     const uid = getUserId()
     const userTasksDocRef = doc(db, "userTasks", `user-${uid}`) // Referencia a la DB de las tasks del usuario
@@ -29,6 +29,7 @@ const addTask = async (desc) => {
     const tasks = getLocalstorageUserTasks(uid)
     const task = { id: uuidv4(), descripcion: desc, completado: false }
     tasks.push(task)
+    setSyncLater(true)
     setLocalstorageUserTasks(uid, JSON.stringify(tasks))
   }
 }
@@ -115,7 +116,7 @@ const deleteTask = async (id) => {
     })
   
     tasks.splice(tId, 1)
-  
+    
     setLocalstorageUserTasks(uid, JSON.stringify(tasks))
   }
 }
