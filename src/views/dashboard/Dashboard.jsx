@@ -60,9 +60,15 @@ export const Dashboard = () => {
     
     if (tasks.length == 0) {
       getUserTasks(setTasks)
+    } else {
+      setTasks(tasks)
     }
+  }, [])
 
-    setTasks(tasks)
+  useEffect(() => {
+    if(!syncLater) {
+      getUserTasks(setTasks)
+    }
   }, [])
 
   useEffect(() => {
