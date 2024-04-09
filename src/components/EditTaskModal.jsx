@@ -17,7 +17,7 @@ export const EditTaskModal = ({ setSyncLater, setTasks, taskDesc }) => {
 
   return (
     <div className="modal fade" id="editTaskModal" tabIndex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
-      <div className="modal-dialog">
+      <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <div className="modal-header bg-dark text-white">
             <h1 className="modal-title fs-5" id="exampleModalLabel">Edit Task Description</h1>
@@ -25,7 +25,7 @@ export const EditTaskModal = ({ setSyncLater, setTasks, taskDesc }) => {
           <div className="modal-body">
             <div className="mb-3">
               <p>New description:</p>
-              <textarea className="form-control" id="message-text" value={newDesc} onChange={(e) => {
+              <textarea className="form-control" id="message-text" rows="5" value={newDesc} onChange={(e) => {
                 setNewDesc(e.target.value)
               }} />
             </div>
