@@ -13,7 +13,7 @@ export const App = () => {
         <div className="d-flex justify-content-center mt-2">
           <h1>Website content</h1>
         </div>
-        <button className="btn btn-primary" onClick={() => signOutUser(navigate)}>Loggout btn</button>
+        {/* <button className="btn btn-primary" onClick={() => signOutUser(navigate)}>Loggout btn</button> */}
       </div>
     </>
   )
