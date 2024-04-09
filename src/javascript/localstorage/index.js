@@ -27,9 +27,6 @@ const setLocalstorageUserId = (uid) => {
 }
 
 
-export { getLocalstorageUserTasks,
-         getLocalstorageUserId,
-         removeLocalstorageUserId,
-         removeLocalstorageUserTasks,
-         setLocalstorageUserTasks,
-         setLocalstorageUserId }
+export { getLocalstorageUserTasks, getLocalstorageUserId,
+         removeLocalstorageUserId, removeLocalstorageUserTasks,
+         setLocalstorageUserTasks, setLocalstorageUserId }

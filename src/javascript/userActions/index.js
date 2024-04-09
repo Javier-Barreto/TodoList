@@ -6,7 +6,7 @@ import {
   signOut } from "firebase/auth";
 
 import { createUserTasksDB } from "../firestore/index"
-import { removeLocalstorageUserId, removeLocalstorageUserTasks, setLocalstorageUserId, setLocalstorageUserTasks } from "../localstorage";
+import { getLocalstorageUserId, removeLocalstorageUserId, removeLocalstorageUserTasks, setLocalstorageUserId, setLocalstorageUserTasks } from "../localstorage";
 
 const auth = getAuth();
 
@@ -44,6 +44,7 @@ const signInUser = (email, password,navigate) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((data) => {
         setLocalstorageUserId(data.user.uid)
+        setLocalstorageUserTasks(data.user.uid, JSON.stringify([]))
       })
       .then(() => {
           navigate('/dashboard')
@@ -62,8 +63,8 @@ const signInUser = (email, password,navigate) => {
 const signOutUser = (navigate) => {
   if(navigator.onLine) {
     signOut(auth).then(() => {
+      removeLocalstorageUserTasks(getLocalstorageUserId())
       removeLocalstorageUserId("userId")
-      removeLocalstorageUserTasks(getUserId())
     })
     .then(() => {
       alert("Logged out")
@@ -76,6 +77,7 @@ const signOutUser = (navigate) => {
       alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
     })
   }
+  temp = ""
 }
 
 const isUserLogged = (navigate) => {
