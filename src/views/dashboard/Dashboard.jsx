@@ -41,7 +41,7 @@ export const Dashboard = () => {
 
   const validAddTask = () => {
     if (descripcion == "") {
-      alert("Favor de ingresar la descripcion de la tarea")
+      alert("Please, fill out the description of the task")
     } else {
       setDescripcion("")
       addTask(descripcion, setSyncLater)
@@ -90,7 +90,7 @@ export const Dashboard = () => {
                   setDescripcion(e.target.value)
                 }
               } value={descripcion} />
-              <button className="btn btn-outline-secondary" type="submit" onClick={() => validAddTask()}>Agregar</button>
+              <button className="btn btn-outline-secondary" type="submit" onClick={() => validAddTask()}>Add</button>
             </div>
           </form>
 

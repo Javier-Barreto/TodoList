@@ -3,7 +3,7 @@ import { completeTask, deleteTask } from '../javascript/firestore'
 
 export const Task = ({ id, completado, descripcion, setSyncLater, setTasks, setTaskDesc}) => {
   const validateDelete = () => {
-    if (window.confirm("Quieres borrar la tarea?")) {
+    if (window.confirm("Do you want to delete the task?")) {
       deleteTask(id, setSyncLater, setTasks)
     }
   }

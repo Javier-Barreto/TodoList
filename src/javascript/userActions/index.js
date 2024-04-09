@@ -31,8 +31,6 @@ const createUser = ( email, password, navigate) =>{
   
       alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
     });
-  } else {
-    alert()
   }
 }
 

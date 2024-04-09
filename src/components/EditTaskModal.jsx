@@ -10,7 +10,7 @@ export const EditTaskModal = ({ setSyncLater, setTasks, taskDesc }) => {
   }, [taskDesc])
 
   const validateEdit = () => {
-    if(window.confirm("Quieres editar la tarea?")) {
+    if(window.confirm("Do you want to edit the task?")) {
       editTaskDescription(id, newDesc, setSyncLater, setTasks)
     }
   }
