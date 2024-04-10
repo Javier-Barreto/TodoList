@@ -1,2 +1,10 @@
 // Import all of Bootstrap's CSS
 @import "bootstrap/scss/bootstrap";
+
+.hoverToPointer {
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: $gray-400;
+}

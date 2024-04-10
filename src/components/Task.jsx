@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaCircleCheck, FaPencil, FaArrowRotateLeft, FaSliders, FaTrashCan } from 'react-icons/fa6'
 import { completeTask, deleteTask } from '../javascript/firestore'
 
 export const Task = ({ id, completado, descripcion, setSyncLater, setTasks, setTaskDesc}) => {
@@ -15,22 +16,30 @@ export const Task = ({ id, completado, descripcion, setSyncLater, setTasks, setT
   }
   
   return (
-    <div className="mb-2 border rounded p-3 bg-dark text-white">
-      <div className="col-12 align-middle">
+    <div className="mb-2 border rounded p-3 pe-0 bg-dark text-white row g-0">
+      <div className="col-11 align-middle pt-1 border-start ps-3">
         <p>{descripcion}</p>
       </div>
-      <div className="col-12 d-flex justify-content-end">
-        {
-          completado ? 
-            <button className="btn btn-outline-warning mx-2" type="button" onClick={() => completeTask(id, setSyncLater, setTasks)}>Undone</button>
-            :
-            <>
-              <button className="btn btn-outline-success mx-2" type="button" onClick={() => completeTask(id, setSyncLater, setTasks)}>Done</button>
-              <button className="btn btn-outline-warning mx-2" data-bs-toggle="modal" data-bs-target="#editTaskModal"
-                      onClick={() => taskDesc()}>Edit</button>
-            </>
-        }
-        <button className="btn btn-outline-danger" type="button" onClick={() => validateDelete()}>Delete</button>
+
+      <div className="col-1">
+        <div className="dropdown">
+          <a className="hoverToPointer dropdown-toggle" data-bs-toggle="dropdown">
+            <FaSliders />
+          </a>
+
+          <ul className="dropdown-menu">
+            {
+              completado ? 
+                  <a className="dropdown-item hoverToPointer" onClick={() => completeTask(id, setSyncLater, setTasks)}> <FaArrowRotateLeft /> Undone</a>
+                :
+                  <>
+                    <a className="dropdown-item hoverToPointer" onClick={() => completeTask(id, setSyncLater, setTasks)}> <FaCircleCheck /> Mark as done</a>
+                    <a className="dropdown-item hoverToPointer" data-bs-toggle="modal" data-bs-target="#editTaskModal" onClick={() => taskDesc()}> <FaPencil /> Edit</a>
+                  </>
+            }
+            <li> <a className="dropdown-item hoverToPointer" onClick={() => validateDelete()}> <FaTrashCan /> Delete</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   )
