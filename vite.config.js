@@ -7,7 +7,8 @@ export default defineConfig((mode) => {
   
   return {
     define: {
-      'process.env.APIKEY': JSON.stringify(env.APIKEY)
+      'process.env.APIKEY': JSON.stringify(env.APIKEY),
+      'process.env.GAK': JSON.stringify(env.GAK)
     },
 
     plugins: [react(), VitePWA({

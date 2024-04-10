@@ -1,7 +1,9 @@
 import { 
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  signInWithCredential,
   signInWithEmailAndPassword,
   signOut } from "firebase/auth";
 
@@ -60,6 +62,31 @@ const signInUser = (email, password,navigate) => {
   }
 }
 
+const credentialResponse = (response) => {
+  // Build Firebase credential with the Google ID token.
+  const idToken = response.credential;
+  const googleProvider =  GoogleAuthProvider.credential(idToken);
+  const auth = getAuth()
+
+  // Sign in with credential from the Google user.
+  signInWithCredential(auth, googleProvider)
+    .then((data) => {
+      const { user: { uid }} = data
+      createUserTasksDB(uid)
+      setLocalstorageUserId(uid)
+      setLocalstorageUserTasks(uid, JSON.stringify([]))
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      
+      alert(`There has been an error! ${errorCode}: ${errorMessage}`)
+    }
+  );
+}
+
+
 const signOutUser = (navigate) => {
   if(navigator.onLine) {
     signOut(auth).then(() => {
@@ -77,7 +104,6 @@ const signOutUser = (navigate) => {
       alert(`There's been an error: Error ${errorCode}, ${errorMessage}`)
     })
   }
-  temp = ""
 }
 
 const isUserLogged = (navigate) => {
@@ -91,4 +117,4 @@ const isUserLogged = (navigate) => {
 
 }
 
-export { createUser, getUserId, isUserLogged, signInUser, signOutUser }
+export { createUser, credentialResponse, getUserId, isUserLogged, signInUser, signOutUser }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Navbar } from '../../components/Navbar'
 import * as dbApp from '../../../db/db'
-import { createUser, isUserLogged, signInUser } from "../../javascript/userActions/index"
+import { createUser, credentialResponse, isUserLogged, signInUser } from "../../javascript/userActions/index"
 import { useNavigate } from "react-router-dom"
 
 const Login = () => {
@@ -49,6 +49,17 @@ const Login = () => {
       isUserLogged(navigate)
     }
   }, [])
+
+  const googleBtn = () => {
+    google.accounts.id.initialize({
+      client_id: process.env.GAK,
+      callback: credentialResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("buttonDiv"),
+      { theme: "outline", size: "large" }  // customization attributes
+    );
+  }
 
   return (
     <>
@@ -115,6 +126,9 @@ const Login = () => {
             </div>
           </>
         }
+        <div className="d-flex justify-content-center mb-5"  onLoad={googleBtn()}>
+          <div id="buttonDiv"></div>
+        </div>
       </div>
     </>
   )
