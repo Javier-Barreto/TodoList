@@ -1,10 +1,10 @@
 import React from 'react'
 import { Navbar } from '../../components/Navbar'
 import { useNavigate } from 'react-router-dom'
-import { getUserId, signOutUser } from '../../javascript/userActions'
+import { signOutUser } from '../../javascript/userActions'
 
 export const App = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   return (
     <>

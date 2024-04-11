@@ -8,7 +8,8 @@ import {
   signOut } from "firebase/auth";
 
 import { createUserTasksDB } from "../firestore/index"
-import { getLocalstorageUserId, removeLocalstorageUserId, removeLocalstorageUserTasks, setLocalstorageUserId, setLocalstorageUserTasks } from "../localstorage";
+import { getLocalstorageUserId, removeLocalstorageUserId, removeLocalstorageUserTasks, 
+         setLocalstorageUserId, setLocalstorageUserTasks } from "../localstorage";
 
 const auth = getAuth();
 

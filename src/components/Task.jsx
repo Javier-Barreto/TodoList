@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaCircleCheck, FaPencil, FaArrowRotateLeft, FaSliders, FaTrashCan } from 'react-icons/fa6'
 import { completeTask, deleteTask } from '../javascript/firestore'
+import PropTypes from 'prop-types';
 
 export const Task = ({ id, completado, descripcion, setSyncLater, setTasks, setTaskDesc}) => {
   const validateDelete = () => {
@@ -43,4 +44,13 @@ export const Task = ({ id, completado, descripcion, setSyncLater, setTasks, setT
       </div>
     </div>
   )
+}
+
+Task.propTypes = {
+  id: PropTypes.string,
+  completado: PropTypes.bool,
+  descripcion: PropTypes.string,
+  setSyncLater: PropTypes.func,
+  setTasks: PropTypes.func,
+  setTaskDesc: PropTypes.func
 }

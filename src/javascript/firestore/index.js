@@ -77,9 +77,11 @@ const completeTask = async (id, setSyncLater, setTasks) => {
 const createUserTasksDB = async (uid) => {
   const docRef = doc(db, "userTasks", `user-${uid}`) 
 
-  await setDoc(docRef, { // db - Colleccion - Nombre del documento
-    tasks: []
-  }, { mergeFields: true });
+  if (docRef) {
+    await setDoc(docRef, { // db - Colleccion - Nombre del documento
+      tasks: []
+    });
+  }
 }
 
 const deleteTask = async (id, setSyncLater, setTasks) => {

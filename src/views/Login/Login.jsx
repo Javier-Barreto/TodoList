@@ -3,6 +3,7 @@ import { Navbar } from '../../components/Navbar'
 import * as dbApp from '../../../db/db'
 import { createUser, credentialResponse, isUserLogged, signInUser } from "../../javascript/userActions/index"
 import { useNavigate } from "react-router-dom"
+import { LoginInput } from "../../components/LoginInput"
 
 const Login = () => {
   const [logging, setLogging] = useState(true)
@@ -44,12 +45,6 @@ const Login = () => {
     }
   }
 
-  useEffect(() => {
-    if (navigator.onLine) {
-      isUserLogged(navigate)
-    }
-  }, [])
-
   const googleBtn = () => {
     google.accounts.id.initialize({
       client_id: process.env.GAK,
@@ -60,6 +55,13 @@ const Login = () => {
       { theme: "outline", size: "large" }  // customization attributes
     );
   }
+
+  useEffect(() => {
+    if (navigator.onLine) {
+      isUserLogged(navigate)
+    }
+  }, [])
+
 
   return (
     <>
@@ -72,17 +74,11 @@ const Login = () => {
             </div>
             <div className="container pt-0">
               <form>
-                <div className="form-group m-3">
-                  <label htmlFor="loginEmail">Email</label>
-                  <input type="text" className="form-control" id="loginEmail" placeholder="email@example.com" onChange={(e) => setLoginEmail(e.target.value)} 
-                         value={loginE} required/>
-                </div>
-                <div className="form-group m-3">
-                  <label htmlFor="loginPassword">Password</label>
-                  <input type="password" className="form-control" id="loginPassword" placeholder="password" onChange={(e) => setLoginPwd(e.target.value)} 
-                         value={loginP} required/>
-                </div>
-                <button type="button" className="btn btn-light mx-3" onClick={() => {
+                <LoginInput inputId="loginEmail" inputLabel="Email" inputOnChangeFunc={setLoginEmail} inputPlaceholder="example@example.com" 
+                            inputType="text" inputValue={loginE} />
+                <LoginInput inputId="loginPassword" inputLabel="Password" inputOnChangeFunc={setLoginPwd} inputPlaceholder="password" 
+                            inputType="password" inputValue={loginP} />
+                <button type="  button" className="btn btn-light mx-3" onClick={() => {
                   loginValidation()
                 }}>Sign In</button>
               </form>
@@ -102,16 +98,10 @@ const Login = () => {
             </div>
             <div className="container pt-0">
               <form>
-                <div className="form-group m-3">
-                  <label htmlFor="loginEmail">Email</label>
-                  <input type="text" className="form-control" id="caEmail" placeholder="email@example.com" onChange={(e) => setRgsEmail(e.target.value)} 
-                         value={registerE} required/>
-                </div>
-                <div className="form-group m-3">
-                  <label htmlFor="loginPassword">Password</label>
-                  <input type="password" className="form-control" id="caPassword" placeholder="password" onChange={(e) => setRgsPwd(e.target.value)} 
-                         value={registerP} required/>
-                </div>
+                <LoginInput inputId="caEmail" inputLabel="Email" inputOnChangeFunc={setRgsEmail} inputPlaceholder="example@example.com" 
+                            inputType="text" inputValue={registerE} />
+                <LoginInput inputId="caPassword" inputLabel="Password" inputOnChangeFunc={setRgsPwd} inputPlaceholder="password" 
+                            inputType="password" inputValue={registerP} />
                 <button type="button" className="btn btn-light mx-3" onClick={() => {
                   registerValidation()
                 }}>Create Account</button>
